@@ -1,7 +1,14 @@
+if Gem.win_platform?
+  Encoding.default_external = Encoding.find(Encoding.locale_charmap)
+  Encoding.default_internal = __ENCODING__
+
+  [STDIN, STDOUT].each do |io|
+    io.set_encoding(Encoding.default_external, Encoding.default_internal)
+  end
+end
 puts "Тест поможет определить ваш уровень коммуникабельности.\nДля этого необходимо правдиво ответить на следующие вопросы."
 
 current_path = File.dirname(__FILE__)
-
 questions_path = current_path + "/data/questions.txt"
 results_path = current_path + "/data/results.txt"
 
@@ -23,13 +30,12 @@ end
 
 answers = ['а) да', 'б) нет', 'в) иногда']
 vars = ['да', 'нет', 'иногда']
-
 answer_counter = 0
 for item in questions do
-  puts item.to_s + "\n" + answers.join("\n")
+  puts "#{item}\n #{answers.join("\n")}"
   print ">"
   answer = STDIN.gets.encode("UTF-8").chomp.downcase
-  while vars.include?(answer) == false do
+  until vars.include?(answer) do
     puts "Возможные варианты ответа: да, нет, иногда"
     print ">"
     answer = STDIN.gets.encode("UTF-8").chomp.downcase
@@ -43,20 +49,12 @@ for item in questions do
   end
 end
 
-puts answer_counter.to_s
-
-if answer_counter >= 30 && answer_counter <= 32
-  puts results[0].to_s
-elsif answer_counter >= 25 && answer_counter <= 29
-  puts results[1].to_s
-elsif answer_counter >= 19 && answer_counter <= 24
-  puts results[2].to_s
-elsif answer_counter >= 14 && answer_counter <= 18
-  puts results[3].to_s
-elsif answer_counter >= 9 && answer_counter <= 13
-  puts results[4].to_s
-elsif answer_counter >= 4 && answer_counter <= 8
-  puts results[5].to_s
-else
-  puts results[6].to_s
-end
+puts case answer_counter
+       when (30..32) then results[0]
+       when (25..29) then results[1]
+       when (19..24) then results[2]
+       when (14..18) then results[3]
+       when (9..13) then results[4]
+       when (4..8) then results[5]
+       else results[6]
+     end
