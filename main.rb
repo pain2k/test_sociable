@@ -9,7 +9,7 @@ end
 require_relative "lib/test"
 require_relative "lib/result_printer"
 
-VERSION = "Программа-тест оценки коммуникабельности. Версия 4, 15.04.2017"
+VERSION = "Программа-тест оценки коммуникабельности. Версия 6.0"
 
 current_path = File.dirname(__FILE__)
 questions_path = current_path + "/data/questions.txt"
