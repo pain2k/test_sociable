@@ -1,4 +1,7 @@
 class Test
+  attr_reader :points
+  attr_accessor :version
+
   def initialize(questions_path)
     unless File.exist?(questions_path)
       abort "Файл с вопросами #{questions_path} не найден."
@@ -21,7 +24,7 @@ class Test
     user_input = nil
     until user_input == 1 || user_input == 2 || user_input == 3
       puts "введите число: 1 – да, 2 – нет, 3 – иногда, и нажмите Enter"
-      user_input = gets.to_i
+      user_input = STDIN.gets.to_i
     end
 
     if user_input == 1
@@ -32,9 +35,5 @@ class Test
     end
 
     @current_question += 1
-  end
-
-  def points
-    return @points
   end
 end

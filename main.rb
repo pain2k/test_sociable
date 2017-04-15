@@ -9,13 +9,16 @@ end
 require_relative "test"
 require_relative "result_printer"
 
-puts "Тест поможет определить ваш уровень коммуникабельности.\nДля этого необходимо правдиво ответить на следующие вопросы."
+VERSION = "Программа-тест оценки коммуникабельности. Версия 4, 15.04.2017"
 
 current_path = File.dirname(__FILE__)
 questions_path = current_path + "/data/questions.txt"
 results_path = current_path + "/data/results.txt"
 
+puts "Тест поможет определить ваш уровень коммуникабельности.\nДля этого необходимо правдиво ответить на следующие вопросы."
+
 test = Test.new(questions_path)
+test.version = VERSION
 result_printer = ResultPrinter.new(results_path)
 
 until test.finished?
