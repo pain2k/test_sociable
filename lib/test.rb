@@ -11,15 +11,15 @@ class Test
     file.close
 
     @points = 0
-    @current_question = 0
+    @question_number = 0
   end
 
   def finished?
-    return @current_question >= @questions.size
+    return @question_number >= @questions.size
   end
 
   def next_question
-    puts @questions[@current_question]
+    puts @questions[@question_number]
 
     user_input = nil
     until user_input == 1 || user_input == 2 || user_input == 3
@@ -34,6 +34,6 @@ class Test
       @points += 1
     end
 
-    @current_question += 1
+    @question_number += 1
   end
 end

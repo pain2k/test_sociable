@@ -6,8 +6,8 @@ if Gem.win_platform?
     io.set_encoding(Encoding.default_external, Encoding.default_internal)
   end
 end
-require_relative "test"
-require_relative "result_printer"
+require_relative "lib/test"
+require_relative "lib/result_printer"
 
 VERSION = "Программа-тест оценки коммуникабельности. Версия 4, 15.04.2017"
 
